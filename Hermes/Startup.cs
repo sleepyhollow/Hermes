@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Hermes.Data;
 using Hermes.Models;
 using Hermes.Services;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace Hermes
 {
@@ -27,11 +28,23 @@ namespace Hermes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = "809037424275-mrrvd17g6giab7l9vnr2o099l286np7r.apps.googleusercontent.com";
+                googleOptions.ClientSecret = "ImYCnOR8LURuLLKQ7ufhBt6d";
+            });
+            
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "1010776629091678";
+                facebookOptions.AppSecret = "98b43ef2479ee198c0c38a7d99fe029a";
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -61,7 +74,8 @@ namespace Hermes
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }

@@ -1,23 +1,11 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Carousel */
+﻿/* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+.carousel-inner .carousel-item img[src$=".svg"] {
     width: 100%;
 }
 
@@ -32,4 +20,27 @@
     .carousel-caption {
         display: none;
     }
+}
+
+.logout-button {
+    border: none;
+    background-color: transparent !important;
+}
+
+.logout-button:focus {
+    box-shadow: none;
+}
+
+.container .nav-pills .row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.container .nav-pills .row,
+.container .nav-pills .row .nav-link {
+    width: 100%;
+}
+
+.nav-pills .container .row .nav-link:hover {
+    background-color: #eee;
 }
